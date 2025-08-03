@@ -1,0 +1,33 @@
+backend:
+  name: github
+  repo: PWeissel/mathelon-website
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Titel", name: "title", widget: "string"}
+      - {label: "Datum", name: "date", widget: "datetime"}
+      - {label: "Beschreibung", name: "description", widget: "text"}
+      - {label: "Bild", name: "image", widget: "image", required: false}
+      - {label: "Inhalt", name: "body", widget: "markdown"}
+
+  - name: "projekte"
+    label: "Projekte"
+    folder: "content/projekte"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titel", name: "title", widget: "string"}
+      - {label: "Datum", name: "date", widget: "datetime"}
+      - {label: "Kategorie", name: "category", widget: "select", options: ["Pendelleuchten", "Lichtoberflächen", "Steuerungen"]}
+      - {label: "Beschreibung", name: "description", widget: "text"}
+      - {label: "Bild", name: "image", widget: "image"}
+      - {label: "Inhalt", name: "body", widget: "markdown"}
