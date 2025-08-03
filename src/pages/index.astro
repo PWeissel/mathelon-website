@@ -1,14 +1,18 @@
+
 ---
-import Layout from '../layouts/Layout.astro';
+// src/pages/index.astro
+import HeroSection from '../components/HeroSection.astro';
 ---
 
-<Layout title="MATHELON - Startseite">
-  <main class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold text-center mb-8">
-      Willkommen bei MATHELON
-    </h1>
-    <p class="text-xl text-center">
-      Licht als Lebensgefühl - Ihre Website wird bald fertig sein!
-    </p>
-  </main>
-</Layout>
+<html>
+<head>
+  <title>MATHELON</title>
+</head>
+<body>
+  <HeroSection 
+    philippImage="/images/philipp-weissel.jpg"
+    productImage="/images/pendelleuchte.jpg"
+  />
+  <!-- Weitere Sektionen -->
+</body>
+</html>

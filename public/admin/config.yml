@@ -30,3 +30,14 @@ collections:
       - {label: "Beschreibung", name: "description", widget: "text"}
       - {label: "Bild", name: "image", widget: "image"}
       - {label: "Inhalt", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "src/content/homepage.md"
+        fields:
+          - {label: "Hero Headline", name: "hero_headline", widget: "string"}
+          - {label: "Hero Subline", name: "hero_subline", widget: "text"}
+          - {label: "Philipp Image", name: "philipp_image", widget: "image"}
+          - {label: "Product Image", name: "product_image", widget: "image"}
