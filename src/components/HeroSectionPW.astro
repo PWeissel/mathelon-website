@@ -1,0 +1,83 @@
+---
+// src/components/HeroSection.astro
+interface Props {
+  headline?: string;
+  subline?: string;
+  primaryButtonText?: string;
+  primaryButtonLink?: string;
+  secondaryButtonText?: string;
+  secondaryButtonLink?: string;
+  philippImage?: string;
+  productImage?: string;
+  trustItems?: string[];
+}
+
+const {
+  headline = "Lichtlösungen, die Sie sonst nirgendwo kaufen können",
+  subline = "Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen",
+  primaryButtonText = "Kostenlose Lichtberatung vereinbaren",
+  primaryButtonLink = "#kontakt",
+  secondaryButtonText = "Projektbeispiele ansehen",
+  secondaryButtonLink = "#projekte",
+  philippImage = "/images/philipp-weissel.jpg",
+  productImage = "/images/pendelleuchte.jpg",
+  trustItems = [
+    "Kostenlose Erstberatung",
+    "Über 30 Jahre Erfahrung", 
+    "DACH-weiter Service"
+  ]
+} = Astro.props;
+---
+
+<section class="hero" id="hero">
+   <div class="hero-container">
+    <!-- Content Bereich -->
+    <div class="hero-content">
+     <h1 class="hero-headline">
+        {headline}
+      </h1>
+      
+      <p class="hero-subline">
+        {subline}
+      </p>
+
+      <div class="hero-cta">
+        <a href={primaryButtonLink} class="btn btn-primary">
+          {primaryButtonText}
+        </a>
+        <a href={secondaryButtonLink} class="btn btn-secondary">
+          {secondaryButtonText}
+        </a>
+      </div>
+
+      <div class="hero-trust">
+        {trustItems.map((item) => (
+          <div class="trust-item">{item}</div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Visual Bereich -->
+    <div class="hero-visual">
+      <div class="visual-grid">
+             
+        <!-- MATHELON Pendelleuchte -->
+        <div class="visual-item visual-product">
+          <img 
+            src={productImage} 
+            alt="Exquisite MATHELON Pendelleuchte aus österreichischem Eichenholz"
+            loading="eager"
+            width="400"
+            height="400"
+          />
+        </div>
+       </div>
+    </div>
+</div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <span class="scroll-text">Mehr erfahren</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
