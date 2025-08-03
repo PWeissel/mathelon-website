@@ -1,6 +1,6 @@
 ---
 hero:
-  headline: Lichtlösungen, die Sie nirgendwo kaufen können
+  headline: Lichtlösungen, die Sie wirklich nirgendwo kaufen können
   subline: Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert
     nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen
   primary_button_text: Kostenlose Lichtberatung vereinbaren
