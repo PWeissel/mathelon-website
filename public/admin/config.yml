@@ -5,6 +5,9 @@ backend:
 media_folder: "public/images"
 public_folder: "/images"
 
+# Lokalisierung für deutsche Inhalte
+locale: 'de'
+
 collections:
   - name: "blog"
     label: "Blog Posts"
@@ -32,12 +35,154 @@ collections:
       - {label: "Inhalt", name: "body", widget: "markdown"}
 
   - name: "pages"
+    label: "Seiten"
     files:
       - label: "Homepage"
         name: "homepage"
         file: "src/content/homepage.md"
         fields:
-          - {label: "Hero Headline", name: "hero_headline", widget: "string"}
-          - {label: "Hero Subline", name: "hero_subline", widget: "text"}
-          - {label: "Philipp Image", name: "philipp_image", widget: "image"}
-          - {label: "Product Image", name: "product_image", widget: "image"}
+          - label: "Hero Sektion"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Überschrift", name: "headline", widget: "string", default: "Lichtlösungen, die Sie sonst nirgendwo kaufen können"}
+              - {label: "Untertitel", name: "subline", widget: "text", default: "Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen"}
+              - {label: "Primärer Button Text", name: "primary_button_text", widget: "string", default: "Kostenlose Lichtberatung vereinbaren"}
+              - {label: "Primärer Button Link", name: "primary_button_link", widget: "string", default: "#kontakt"}
+              - {label: "Sekundärer Button Text", name: "secondary_button_text", widget: "string", default: "Projektbeispiele ansehen"}
+              - {label: "Sekundärer Button Link", name: "secondary_button_link", widget: "string", default: "#projekte"}
+              - {label: "Philipp Weissel Bild", name: "philipp_image", widget: "image"}
+              - {label: "Produkt Bild", name: "product_image", widget: "image"}
+              - label: "Vertrauenselemente"
+                name: "trust_items"
+                widget: "list"
+                default: ["Kostenlose Erstberatung", "Über 30 Jahre Erfahrung", "DACH-weiter Service"]
+                field: {label: "Element", name: "item", widget: "string"}
+
+          - label: "Problem Sektion"
+            name: "problem"
+            widget: "object"
+            fields:
+              - {label: "Überschrift", name: "headline", widget: "string", default: "Kennen Sie das auch?"}
+              - label: "Probleme"
+                name: "problems"
+                widget: "list"
+                fields:
+                  - {label: "Titel", name: "title", widget: "string"}
+                  - {label: "Beschreibung", name: "description", widget: "text"}
+
+          - label: "Lösung Sektion"
+            name: "solution"
+            widget: "object"
+            fields:
+              - {label: "Überschrift", name: "headline", widget: "string", default: "So wird Ihre Vision zur perfekten Lichtlösung"}
+              - label: "Schritte"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - {label: "Nummer", name: "number", widget: "string"}
+                  - {label: "Titel", name: "title", widget: "string"}
+                  - {label: "Untertitel", name: "subtitle", widget: "string"}
+                  - {label: "Beschreibung", name: "description", widget: "list", field: {label: "Punkt", name: "point", widget: "string"}}
+
+          - label: "Erfolg Sektion"
+            name: "success"
+            widget: "object"
+            fields:
+              - {label: "Überschrift", name: "headline", widget: "string", default: "Ihre Projekte werden zum Gesamtkunstwerk"}
+              - label: "Erfolgs-Szenarien"
+                name: "scenarios"
+                widget: "list"
+                fields:
+                  - {label: "Icon", name: "icon", widget: "string"}
+                  - {label: "Titel", name: "title", widget: "string"}
+                  - {label: "Beschreibung", name: "description", widget: "text"}
+
+          - label: "Anwendungen Sektion"
+            name: "applications"
+            widget: "object"
+            fields:
+              - {label: "Überschrift", name: "headline", widget: "string", default: "Für welche Projekte entwickeln wir individuelle Lichtlösungen?"}
+              - label: "Zielgruppen"
+                name: "target_groups"
+                widget: "list"
+                fields:
+                  - {label: "Titel", name: "title", widget: "string"}
+                  - {label: "Beschreibung", name: "description", widget: "list", field: {label: "Anwendung", name: "application", widget: "string"}}
+
+          - label: "Autorität Sektion"
+            name: "authority"
+            widget: "object"
+            fields:
+              - {label: "Überschrift", name: "headline", widget: "string", default: "Warum können wir Ihnen helfen, wo andere nicht weiterkommen?"}
+              - {label: "Empathie Text", name: "empathy_text", widget: "text"}
+              - label: "Statistiken"
+                name: "stats"
+                widget: "list"
+                fields:
+                  - {label: "Zahl", name: "number", widget: "string"}
+                  - {label: "Label", name: "label", widget: "string"}
+              - label: "Kompetenzen"
+                name: "competencies"
+                widget: "list"
+                field: {label: "Kompetenz", name: "competency", widget: "string"}
+
+          - label: "Haupt CTA Sektion"
+            name: "main_cta"
+            widget: "object"
+            fields:
+              - {label: "Überschrift", name: "headline", widget: "string", default: "Lassen Sie uns über Ihr Lichtprojekt sprechen"}
+              - {label: "Beschreibung", name: "description", widget: "text"}
+              - {label: "Button Text", name: "button_text", widget: "string", default: "Kostenlose Lichtberatung vereinbaren"}
+              - {label: "Button Link", name: "button_link", widget: "string", default: "mailto:service@mathelon.com"}
+              - label: "Vertrauenselemente"
+                name: "trust_items"
+                widget: "list"
+                field: {label: "Element", name: "item", widget: "string"}
+
+  - name: "settings"
+    label: "Einstellungen"
+    files:
+      - label: "Website Einstellungen"
+        name: "site"
+        file: "src/content/settings.md"
+        fields:
+          - {label: "Website Titel", name: "site_title", widget: "string", default: "MATHELON"}
+          - {label: "Website Beschreibung", name: "site_description", widget: "text"}
+          - {label: "Logo", name: "logo", widget: "image", required: false}
+          - label: "Kontakt"
+            name: "contact"
+            widget: "object"
+            fields:
+              - {label: "E-Mail", name: "email", widget: "string"}
+              - {label: "Telefon", name: "phone", widget: "string"}
+              - {label: "Adresse", name: "address", widget: "text"}
+          - label: "Social Media"
+            name: "social"
+            widget: "object"
+            required: false
+            fields:
+              - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+              - {label: "XING", name: "xing", widget: "string", required: false}
+          - label: "SEO"
+            name: "seo"
+            widget: "object"
+            fields:
+              - {label: "Meta Titel", name: "meta_title", widget: "string"}
+              - {label: "Meta Beschreibung", name: "meta_description", widget: "text"}
+              - {label: "Keywords", name: "keywords", widget: "list", field: {label: "Keyword", name: "keyword", widget: "string"}}
+
+# Editorial Workflow aktivieren (optional)
+publish_mode: editorial_workflow
+
+# Deutsche Übersetzungen für das CMS Interface
+editor:
+  preview: true
+
+# Show preview links in the editor
+show_preview_links: true
+
+# Slug Encoding
+slug:
+  encoding: "ascii"
+  clean_accents: true
