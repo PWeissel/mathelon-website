@@ -2,6 +2,8 @@ backend:
   name: github
   repo: PWeissel/mathelon-website
   branch: main
+  auth_type: implicit
+  base_url: https://api.netlify.com
 
 media_folder: "public/images"
 public_folder: "/images"
