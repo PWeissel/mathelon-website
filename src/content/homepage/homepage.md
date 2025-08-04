@@ -1,16 +1,30 @@
 ---
 hero:
-  headline: Lichtlösungen, die Sie sonst nirgendwo kaufen können wollen werden
-  subline: Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert
-    nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen
-  primary_button_text: Kostenlose Lichtberatung vereinbaren
   primary_button_link: https://mathelon.com/
-  secondary_button_link: https://mathelon.com/
-  secondary_button_text: Schauen Sie sich unsere Projektbeispiele an
   philipp_image: /images/philipp-weissel.jpg
   product_image: /images/pendelleuchte.jpg
+  secondary_button_text: Schauen Sie sich unsere Projektbeispiele an
+  headline: Lichtlösungen, die Sie sonst nirgendwo kaufen können
+  subline: Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert
+    nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen
+  trust_items:
+    - Kostenlose Erstberatung
+    - Über 30 Jahre Erfahrung
+    - Service in Deutschland, Österreich und der Schweiz
+  secondary_button_link: https://mathelon.com/
+  primary_button_text: Kostenlose Lichtberatung vereinbaren
 problem:
   headline: Kennen Sie das auch?
+  problems:
+    - title: Standard-Beleuchtung erfüllt nicht Ihre hohen Designansprüche
+      description: Sie suchen nach einer Lichtlösung, die perfekt zu Ihrem
+        außergewöhnlichen Design passt, finden aber am Markt nur Kompromisse?
+    - title: Ihre Kunden verdienen mehr als 08/15-Lösungen
+      description: Als Innenarchitekt, Lichtplaner oder Hersteller wollen Sie Projekte
+        realisieren, die begeistern und in Erinnerung bleiben?
+    - title: Sie haben eine klare Vision, aber keine passende Lichtlösung?
+      description: Ihre Designkonzepte sind durchdacht, aber die verfügbaren Leuchten
+        passen einfach nicht zu Ihrer Vision?
 solution:
   headline: So wird Ihre Vision zur perfekten Lichtlösung
 success:
