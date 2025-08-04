@@ -29,4 +29,18 @@
     --fs-xl: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
     --fs-xxl: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
     --fs-xxxl: clamp(3.05rem, 3.54vi + 2.17rem, 5rem);
-  }
+
+h2
+{
+  font-size: var(--fs-lg);
+  font-weight: 500;
+}
+
+    h3
+{
+  font-size: var(--fs-md);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+}

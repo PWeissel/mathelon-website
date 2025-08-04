@@ -43,10 +43,10 @@ interface Props {
 }
 
 const {
-  backgroundColor = 'white',
+  backgroundColor = 'dark',
   imagePosition = 'left',
   sectionPadding = 'medium',
-  containerSize = 'medium',
+  containerSize = 'large',
   
   eyebrow,
   headline = homepageContent?.data.problem.headline,
@@ -69,27 +69,6 @@ const {
 // Dynamic heading tag
 const HeadingTag = headlineTag;
 ---
-
-<pre>{JSON.stringify(homepageContent?.data, null, 2)}</pre>
-
-<section class="problems-overview">
-  {problem.headline && <h2>{problem.headline}</h2>}
-
-  {problems.length > 0 ? (
-    problems.map((item, index) => (
-      <ContentSection 
-        key={index}
-        headline={item.title}
-        text={item.description}
-        backgroundColor="light"
-        imagePosition={index % 2 === 0 ? 'left' : 'right'}
-        image="/images/problem-icon.svg"
-      />
-    ))
-  ) : (
-    <p>Aktuell sind keine Problemfälle eingetragen.</p>
-  )}
-</section>
 
 <section 
   class={`content-section content-section--${backgroundColor} content-section--${sectionPadding} content-section--${containerSize} ${customClass}`}
@@ -119,8 +98,12 @@ const HeadingTag = headlineTag;
           {headline}
         </HeadingTag>
         
-        <div class="content-body" set:html={text}></div>
-        <div class="content-body" set:html={text}></div>
+        {problems?.map((problem, index) => (
+          <div>
+            <h3>{problem.title}</h3>        <!-- ← Titel des Problems -->
+            <p>{problem.description}</p>    <!-- ← Beschreibung -->
+          </div>
+        ))}
 
         {buttonText && buttonLink && (
           <div class="content-button">
