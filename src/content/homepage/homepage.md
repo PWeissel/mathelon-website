@@ -1,12 +1,12 @@
 ---
 hero:
-  headline: Lichtlösungen, die Sie nirgendwo kaufen können
+  headline: Lichtlösungen, die Sie sonst nirgendwo kaufen können
   subline: Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert
     nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen
   primary_button_text: Kostenlose Lichtberatung vereinbaren
-  secondary_button_text: Projektbeispiele ansehen
   primary_button_link: https://mathelon.com/
   secondary_button_link: https://mathelon.com/
+  secondary_button_text: Schauen Sie sich unsere Projektbeispiele an
   philipp_image: /images/philipp-weissel.jpg
   product_image: /images/pendelleuchte.jpg
 problem:
@@ -20,14 +20,14 @@ applications:
 authority:
   headline: Warum können wir Ihnen helfen, wo andere nicht weiterkommen?
   empathy_text: >-
-    - Über 30 Jahre Erfahrung in der Entwicklung individueller
+    **Über 30 Jahre Erfahrung** in der Entwicklung individueller
     Elektroniklösungen
 
-    - Einzigartige Folien-Leiterplatten-Technologie für nahtlose Integration in Oberflächen
+    - **Einzigartige Folien-Leiterplatten-Technologie** für nahtlose Integration in Oberflächen
 
-    - Alles aus einer Hand – von der Beratung bis zur Installation im DACH-Raum
+    - **Alles aus einer Hand** – von der Beratung bis zur Installation im DACH-Raum
 
-    - Nachgewiesene Erfolge bei hunderten individuellen Lichtprojekten
+    - **Nachgewiesene Erfolge** bei hunderten individuellen Lichtprojekten
 main_cta:
   headline: Lassen Sie uns über Ihr Lichtprojekt sprechen
   description: In nur 30 Minuten zeigen wir Ihnen, wie Ihre Designvision zur

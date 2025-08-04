@@ -39,7 +39,7 @@ collections:
     files:
       - label: "Homepage"
         name: "homepage"
-        file: "src/content/homepage.md"
+        file: "src/content/homepage/homepage.md"
         fields:
           - label: "Hero Sektion"
             name: "hero"
