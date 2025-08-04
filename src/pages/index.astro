@@ -2,7 +2,8 @@
 // src/pages/index.astro
 import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import HeroSection from '../components/HeroSectionPW.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
 import '../style.css';
 
 // Homepage-Inhalt laden
@@ -17,51 +18,13 @@ const data = homepageContent.data;
   <title>MATHELON</title>
 </head>
 <body>
-<section class="hero" id="hero">
-   <div class="hero-container">
-    <!-- Content Bereich -->
-    <div class="hero-content">
-     <h1 class="hero-headline">
-        {homepageContent.data.hero.headline}
-      </h1>
-      
-      <p class="hero-subline">
-        {homepageContent.data.hero.subline}
-      </p>
-
-      <div class="hero-cta">
-        <a href={homepageContent.data.hero.primary_button_link} class="btn btn-primary">
-          {homepageContent.data.hero.primary_button_text}
-        </a>
-        <a href={homepageContent.data.hero.secondary_button_link} class="btn btn-secondary">
-          {homepageContent.data.hero.secondary_button_text}
-        </a>
-      </div>
-      </div>      
-    <!-- Visual Bereich -->
-    <div class="hero-visual">
-      <div class="visual-grid">
-             
-        <!-- MATHELON Pendelleuchte -->
-        <div class="visual-item visual-product">
-          <img 
-            src={homepageContent.data.hero.product_image} 
-            alt="Exquisite MATHELON Pendelleuchte aus österreichischem Eichenholz"
-            loading="eager"
-            width="400"
-            height="400"
-          />
-        </div>
-       </div>
-    </div>
-</div>
-
-  <!-- Scroll Indicator -->
-  <div class="scroll-indicator">
-    <span class="scroll-text">Mehr erfahren</span>
-    <div class="scroll-arrow"></div>
-  </div>
-</section>
-  
-  </body>
+   <Header />
+  <main>
+    <slot />
+  </main>
+    <HeroSection />
+  <main>
+    <slot />
+  </main>
+</body>
 </html>
