@@ -1,0 +1,485 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../style.css';
+
+
+import { getEntryBySlug } from 'astro:content';
+
+// Content laden
+const homepageContent = await getEntryBySlug('homepage', 'homepage');
+const problem = homepageContent?.data?.problem || {};
+const problems = problem.problems || [];
+
+
+
+// src/components/ContentSection.astro
+interface Props {
+  // Layout & Styling
+  backgroundColor?: 'white' | 'light' | 'dark';
+  imagePosition?: 'left' | 'right';
+  sectionPadding?: 'small' | 'medium' | 'large';
+  containerSize?: 'small' | 'medium' | 'large';
+  
+  // Content
+  eyebrow?: string;
+  headline?: string;
+  headlineTag?: 'h1' | 'h2' | 'h3' | 'h4';
+  text?: string;
+  
+  // Button
+  buttonText?: string;
+  buttonLink?: string;
+  buttonStyle?: 'primary' | 'secondary' | 'outline';
+  
+  // Image
+  image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  
+  // Additional
+  id?: string;
+  customClass?: string;
+}
+
+const {
+  backgroundColor = 'white',
+  imagePosition = 'left',
+  sectionPadding = 'medium',
+  containerSize = 'medium',
+  
+  eyebrow,
+  headline = homepageContent?.data.problem.headline,
+  headlineTag = 'h2',
+  text = 'Text eingeben',
+  
+  buttonText,
+  buttonLink,
+  buttonStyle = 'primary',
+  
+  image = '/images//philipp-weissel.jpg',
+  imageAlt = 'Bild',
+  imageWidth = 600,
+  imageHeight = 400,
+  
+  id,
+  customClass = ''
+} = Astro.props;
+
+// Dynamic heading tag
+const HeadingTag = headlineTag;
+---
+
+<pre>{JSON.stringify(homepageContent?.data, null, 2)}</pre>
+
+<section class="problems-overview">
+  {problem.headline && <h2>{problem.headline}</h2>}
+
+  {problems.length > 0 ? (
+    problems.map((item, index) => (
+      <ContentSection 
+        key={index}
+        headline={item.title}
+        text={item.description}
+        backgroundColor="light"
+        imagePosition={index % 2 === 0 ? 'left' : 'right'}
+        image="/images/problem-icon.svg"
+      />
+    ))
+  ) : (
+    <p>Aktuell sind keine Problemfälle eingetragen.</p>
+  )}
+</section>
+
+<section 
+  class={`content-section content-section--${backgroundColor} content-section--${sectionPadding} content-section--${containerSize} ${customClass}`}
+  id={id}
+>
+  <div class="container">
+    <div class={`content-grid content-grid--image-${imagePosition}`}>
+      
+      <!-- Image Column -->
+      <div class="content-image">
+        <img 
+          src={image} 
+          alt={imageAlt}
+          width={imageWidth}
+          height={imageHeight}
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Content Column -->
+      <div class="content-text">
+        {eyebrow && (
+          <div class="content-eyebrow">{eyebrow}</div>
+        )}
+        
+        <HeadingTag class="content-headline">
+          {headline}
+        </HeadingTag>
+        
+        <div class="content-body" set:html={text}></div>
+        <div class="content-body" set:html={text}></div>
+
+        {buttonText && buttonLink && (
+          <div class="content-button">
+            <a 
+              href={buttonLink} 
+              class={`btn btn--${buttonStyle}`}
+            >
+              {buttonText}
+            </a>
+          </div>
+        )}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* CSS Custom Properties */
+  :root {
+    --primary-color: #d4ac0d;
+    --primary-dark: #b7950b;
+    --text-dark: #2c3e50;
+    --text-medium: #6c757d;
+    --text-light: #8e9ba3;
+    --bg-white: #ffffff;
+    --bg-light: #f8f9fa;
+    --bg-dark: #2c3e50;
+    --border-radius: 12px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+  }
+
+  /* Section Base */
+  .content-section {
+    width: 100%;
+    position: relative;
+  }
+
+  /* Background Colors */
+  .content-section--white {
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+  }
+
+  .content-section--light {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+  }
+
+  .content-section--dark {
+    background-color: var(--bg-dark);
+    color: white;
+  }
+
+  .content-section--dark .content-eyebrow {
+    color: var(--primary-color);
+  }
+
+  .content-section--dark .content-body {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Section Padding */
+  .content-section--small {
+    padding: 3rem 0;
+  }
+
+  .content-section--medium {
+    padding: 5rem 0;
+  }
+
+  .content-section--large {
+    padding: 8rem 0;
+  }
+
+  /* Container Sizes */
+  .container {
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .content-section--small .container {
+    max-width: 900px;
+  }
+
+  .content-section--medium .container {
+    max-width: 1200px;
+  }
+
+  .content-section--large .container {
+    max-width: 1400px;
+  }
+
+  /* Content Grid */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* Image Position */
+  .content-grid--image-left .content-image {
+    order: 1;
+  }
+
+  .content-grid--image-left .content-text {
+    order: 2;
+  }
+
+  .content-grid--image-right .content-image {
+    order: 2;
+  }
+
+  .content-grid--image-right .content-text {
+    order: 1;
+  }
+
+  /* Image Styling */
+  .content-image {
+    position: relative;
+  }
+
+  .content-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+
+  .content-image img:hover {
+    transform: scale(1.02);
+  }
+
+  /* Text Content */
+  .content-text {
+    max-width: 100%;
+  }
+
+  .content-eyebrow {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .content-headline {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: inherit;
+  }
+
+  .content-body {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+    margin-bottom: 2rem;
+  }
+
+  .content-body h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem 0;
+    color: inherit;
+  }
+
+  .content-body p {
+    margin-bottom: 1.5rem;
+  }
+
+  .content-body ul,
+  .content-body ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .content-body li {
+    margin-bottom: 0.5rem;
+  }
+
+  .content-body strong {
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+
+  .content-section--dark .content-body strong {
+    color: white;
+  }
+
+  /* Button Styling */
+  .content-button {
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .btn--primary {
+    background: linear-gradient(135deg, var(--primary-color), #f1c40f);
+    color: white;
+    border-color: var(--primary-color);
+  }
+
+  .btn--primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 172, 13, 0.4);
+  }
+
+  .btn--secondary {
+    background: var(--text-dark);
+    color: white;
+    border-color: var(--text-dark);
+  }
+
+  .btn--secondary:hover {
+    background: #34495e;
+    transform: translateY(-2px);
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  .btn--outline:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .content-section--dark .btn--outline {
+    color: white;
+    border-color: white;
+  }
+
+  .content-section--dark .btn--outline:hover {
+    background: white;
+    color: var(--text-dark);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .content-grid {
+      gap: 3rem;
+    }
+
+    .content-section--small {
+      padding: 2.5rem 0;
+    }
+
+    .content-section--medium {
+      padding: 4rem 0;
+    }
+
+    .content-section--large {
+      padding: 6rem 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 1rem;
+    }
+
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    /* Mobile: Image always on top */
+    .content-grid--image-left .content-image,
+    .content-grid--image-right .content-image {
+      order: 1;
+    }
+
+    .content-grid--image-left .content-text,
+    .content-grid--image-right .content-text {
+      order: 2;
+    }
+
+    .content-headline {
+      font-size: 2rem;
+    }
+
+    .content-body {
+      font-size: 1rem;
+    }
+
+    .content-section--small {
+      padding: 2rem 0;
+    }
+
+    .content-section--medium {
+      padding: 3rem 0;
+    }
+
+    .content-section--large {
+      padding: 4rem 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .content-grid {
+      gap: 2rem;
+    }
+
+    .content-headline {
+      font-size: 1.8rem;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+      padding: 16px 24px;
+    }
+  }
+
+  /* Focus States für Accessibility */
+  .btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  .content-section--dark .btn:focus-visible {
+    outline-color: white;
+  }
+
+  /* Print Styles */
+  @media print {
+    .content-section {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .content-image img {
+      box-shadow: none;
+    }
+
+    .btn {
+      display: none;
+    }
+  }
+</style>

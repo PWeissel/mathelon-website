@@ -1,4 +1,7 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import '../style.css';
+
 // Homepage-Inhalt laden
 import { getEntry } from 'astro:content';
 const homepageContent = await getEntry('homepage', 'homepage');
@@ -91,24 +94,11 @@ const {
 </section>
 
 <style>
-  /* CSS Custom Properties */
-  :root {
-    --primary-color: #d4ac0d;
-    --primary-dark: #b7950b;
-    --text-dark: #2c3e50;
-    --text-light: #6c757d;
-    --bg-light: #f8f9fa;
-    --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    --shadow: 0 10px 30px rgba(0,0,0,0.1);
-    --border-radius: 20px;
-    --container-width: 1400px;
-    --transition: all 0.3s ease;
-  }
-
-  /* Hero Section */
+  
+/* Hero Section */
   .hero {
     min-height: 100vh;
-    background: var(--bg-gradient);
+    background: var(--bg-light);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -145,8 +135,8 @@ const {
   }
 
   .hero-headline {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
+    font-size: var(--fs-xxl);
+    font-weight: 500;
     line-height: 1.1;
     color: var(--text-dark);
     margin-bottom: 1.5rem;

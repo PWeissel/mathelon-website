@@ -4,6 +4,7 @@ import { getEntry } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import HeroSection from '../components/HeroSection.astro';
+import ProblemSection from '../components/ProblemSection.astro';
 import '../style.css';
 
 // Homepage-Inhalt laden
@@ -18,13 +19,21 @@ const data = homepageContent.data;
   <title>MATHELON</title>
 </head>
 <body>
+
    <Header />
   <main>
     <slot />
   </main>
-    <HeroSection />
+
+  <HeroSection />
   <main>
     <slot />
   </main>
+
+  <ProblemSection />
+  <main>
+    <slot />
+  </main>
+
 </body>
 </html>

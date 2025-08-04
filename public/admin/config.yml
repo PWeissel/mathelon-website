@@ -9,6 +9,7 @@ public_folder: "/images"
 locale: 'de'
 
 collections:
+
   - name: "blog"
     label: "Blog Posts"
     folder: "content/blog"
@@ -20,6 +21,15 @@ collections:
       - {label: "Beschreibung", name: "description", widget: "text"}
       - {label: "Bild", name: "image", widget: "image", required: false}
       - {label: "Inhalt", name: "body", widget: "markdown"}
+
+  - name: "header"
+    label: "Header"
+    widget: "object"
+    fields:
+    - {label: "Logo", name: "logo", widget: "image"}
+    - {label: "Firmenname", name: "company_name", widget: "string"}
+    - {label: "CTA Text", name: "cta_text", widget: "string"}
+    - {label: "CTA Link", name: "cta_link", widget: "string"}
 
   - name: "projekte"
     label: "Projekte"

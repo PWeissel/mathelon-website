@@ -1,0 +1,225 @@
+---
+// Debugging-Version Ihrer Seite
+import Layout from '../layouts/Layout.astro';
+import '../style.css';
+import { getEntry } from 'astro:content';
+
+// SCHRITT 1: Basis-Debugging
+console.log('🔍 Debugging startet...');
+
+// Variablen außerhalb definieren
+let homepageContent = null;
+let data = null;
+let error = null;
+
+try {
+  homepageContent = await getEntry('homepage', 'homepage');
+  console.log('✅ Homepage Content geladen:', !!homepageContent);
+  console.log('📄 Homepage Content:', homepageContent);
+  
+  data = homepageContent?.data;
+  console.log('📊 Data exists:', !!data);
+  console.log('📊 Full Data:', data);
+  
+  // SCHRITT 2: Problem-spezifisches Debugging
+  console.log('🚨 Problem Section exists:', !!data?.problem);
+  console.log('🚨 Problem Section:', data?.problem);
+  console.log('🚨 Problems Array exists:', !!data?.problem?.problems);
+  console.log('🚨 Problems Array:', data?.problem?.problems);
+  console.log('🚨 Problems Array Length:', data?.problem?.problems?.length);
+  
+  // SCHRITT 3: Einzelne Probleme prüfen
+  if (data?.problem?.problems) {
+    data.problem.problems.forEach((problem, index) => {
+      console.log(`🔴 Problem ${index + 1}:`, problem);
+      console.log(`🔴 Problem ${index + 1} Title:`, problem?.title);
+      console.log(`🔴 Problem ${index + 1} Description:`, problem?.description);
+    });
+  }
+  
+} catch (err) {
+  error = err;
+  console.error('❌ Fehler beim Laden:', err);
+}
+
+// Fallback-Daten für Tests
+const testProblems = [
+  {
+    title: "Test Problem 1",
+    description: "Test Beschreibung 1"
+  },
+  {
+    title: "Test Problem 2", 
+    description: "Test Beschreibung 2"
+  }
+];
+---
+
+<Layout>
+  <main>
+    <h1>🔍 Debugging-Seite</h1>
+    
+    <!-- Fehler-Anzeige falls vorhanden -->
+    {error && (
+      <section style="background: #ffebee; padding: 2rem; margin: 2rem 0; border-radius: 8px; border: 2px solid #f44336;">
+        <h2 style="color: #d32f2f;">❌ Fehler beim Laden der Daten</h2>
+        <pre style="background: white; padding: 1rem; border-radius: 4px; color: #d32f2f;">
+          {error.message}
+        </pre>
+        <p><strong>Mögliche Ursachen:</strong></p>
+        <ul>
+          <li>Collection 'homepage' existiert nicht</li>
+          <li>Entry 'homepage' nicht gefunden</li>
+          <li>src/content/config.ts fehlt</li>
+          <li>Datei src/content/homepage/homepage.md existiert nicht</li>
+        </ul>
+      </section>
+    )}
+    
+    <!-- SCHRITT 4: Sichtbare Debug-Ausgabe -->
+    <section style="background: #f0f0f0; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+      <h2>🐛 Debug-Informationen</h2>
+      
+      <h3>1. Basis-Daten:</h3>
+      <pre style="background: white; padding: 1rem; border-radius: 4px; overflow: auto;">
+        Homepage Content exists: {!!homepageContent ? 'JA' : 'NEIN'}
+        Data exists: {!!data ? 'JA' : 'NEIN'}
+        Problem section exists: {!!data?.problem ? 'JA' : 'NEIN'}
+        Problems array exists: {!!data?.problem?.problems ? 'JA' : 'NEIN'}
+        Problems array length: {data?.problem?.problems?.length || 'undefined'}
+        Error: {error ? 'JA' : 'NEIN'}
+      </pre>
+      
+      <h3>2. Problem-Section-Daten:</h3>
+      <pre style="background: white; padding: 1rem; border-radius: 4px; overflow: auto;">
+        {JSON.stringify(data?.problem, null, 2)}
+      </pre>
+      
+      <h3>3. Problems-Array:</h3>
+      <pre style="background: white; padding: 1rem; border-radius: 4px; overflow: auto;">
+        {JSON.stringify(data?.problem?.problems, null, 2)}
+      </pre>
+      
+      <h3>4. Komplette Daten:</h3>
+      <details>
+        <summary>Alle CMS-Daten anzeigen (klicken)</summary>
+        <pre style="background: white; padding: 1rem; border-radius: 4px; overflow: auto; max-height: 400px;">
+          {JSON.stringify(data, null, 2)}
+        </pre>
+      </details>
+    </section>
+
+    <!-- SCHRITT 5: Test mit statischen Daten -->
+    <section style="background: #e8f5e8; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+      <h2>✅ Test mit statischen Daten</h2>
+      {testProblems.map((problem, index) => (
+        <div style="background: white; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+          <h3>Problem {index + 1}: {problem.title}</h3>
+          <p>{problem.description}</p>
+        </div>
+      ))}
+    </section>
+
+    <!-- SCHRITT 6: Test mit CMS-Daten -->
+    <section style="background: #f0f8ff; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+      <h2>🔍 Test mit CMS-Daten</h2>
+      
+      <h3>Problem-Headline:</h3>
+      <p>{data?.problem?.headline || 'KEINE HEADLINE GEFUNDEN'}</p>
+      
+      <h3>Problems-Array-Test:</h3>
+      {data?.problem?.problems ? (
+        <div>
+          <p>✅ Problems-Array gefunden! Anzahl: {data.problem.problems.length}</p>
+          {data.problem.problems.map((problem, index) => (
+            <div style="background: white; padding: 1rem; margin: 1rem 0; border-radius: 4px; border: 2px solid #d4ac0d;">
+              <h4>Problem {index + 1}</h4>
+              <strong>Titel:</strong> {problem?.title || 'KEIN TITEL'}
+              <br />
+              <strong>Beschreibung:</strong> {problem?.description || 'KEINE BESCHREIBUNG'}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p style="color: red; font-weight: bold;">❌ PROBLEMS-ARRAY NICHT GEFUNDEN!</p>
+      )}
+    </section>
+
+    <!-- SCHRITT 7: Alternative Zugriffsmethoden testen -->
+    <section style="background: #fff5f5; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+      <h2>🧪 Alternative Zugriffsmethoden</h2>
+      
+      <h3>Methode 1: Direkter Zugriff</h3>
+      <p>Erstes Problem: {data?.problem?.problems?.[0]?.title || 'NICHT GEFUNDEN'}</p>
+      
+      <h3>Methode 2: Mit Variablen</h3>
+      <script>
+        const problemSection = data?.problem;
+        const problemsArray = problemSection?.problems;
+        console.log('🧪 Problem Section Variable:', problemSection);
+        console.log('🧪 Problems Array Variable:', problemsArray);
+      </script>
+      
+      <h3>Methode 3: Try-Catch</h3>
+      {(() => {
+        try {
+          const problems = data?.problem?.problems;
+          if (!problems || !Array.isArray(problems)) {
+            return <p style="color: orange;">⚠️ Problems ist kein Array oder existiert nicht</p>;
+          }
+          if (problems.length === 0) {
+            return <p style="color: orange;">⚠️ Problems-Array ist leer</p>;
+          }
+          return (
+            <div>
+              <p style="color: green;">✅ Problems-Array ist OK! Anzahl: {problems.length}</p>
+              {problems.map((p, i) => (
+                <div key={i} style="background: white; padding: 0.5rem; margin: 0.5rem 0;">
+                  {p?.title || 'Titel fehlt'}
+                </div>
+              ))}
+            </div>
+          );
+        } catch (error) {
+          return <p style="color: red;">❌ Fehler: {error.message}</p>;
+        }
+      })()}
+    </section>
+
+    <!-- SCHRITT 8: Collection-Info -->
+    <section style="background: #f9f9f9; padding: 2rem; margin: 2rem 0; border-radius: 8px;">
+      <h2>📁 Collection-Informationen</h2>
+      <p><strong>Collection:</strong> homepage</p>
+      <p><strong>Entry:</strong> homepage</p>
+      <p><strong>File Path:</strong> src/content/homepage/homepage.md (vermutlich)</p>
+      
+      <h3>Prüfen Sie:</h3>
+      <ul>
+        <li>✅ Existiert die Datei <code>src/content/homepage/homepage.md</code>?</li>
+        <li>✅ Ist die Frontmatter korrekt formatiert?</li>
+        <li>✅ Gibt es ein <code>src/content/config.ts</code> File?</li>
+        <li>✅ Ist der Dev-Server neu gestartet nach Änderungen?</li>
+      </ul>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  pre {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  code {
+    background: #f0f0f0;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+  }
+</style>

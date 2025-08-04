@@ -15,7 +15,12 @@ const homepage = defineCollection({
     }),
     problem: z.object({
       headline: z.string(),
-    }),
+      problems: z.array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+        }),
+    })
     solution: z.object({
       headline: z.string(),
     }),
