@@ -4,7 +4,7 @@ hero:
   philipp_image: /images/philipp-weissel.jpg
   product_image: /images/pendelleuchte.jpg
   secondary_button_text: Schauen Sie sich unsere Projektbeispiele an
-  headline: Lichtlösungen, die Sie sonst nirgendwo kaufen können wollen werden
+  headline: Lichtlösungen, die Sie sonst nirgendwo kaufen können
   subline: Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert
     nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen
   trust_items:
