@@ -22,15 +22,6 @@ collections:
       - {label: "Bild", name: "image", widget: "image", required: false}
       - {label: "Inhalt", name: "body", widget: "markdown"}
 
-  - name: "header"
-    label: "Header"
-    widget: "object"
-    fields:
-    - {label: "Logo", name: "logo", widget: "image"}
-    - {label: "Firmenname", name: "company_name", widget: "string"}
-    - {label: "CTA Text", name: "cta_text", widget: "string"}
-    - {label: "CTA Link", name: "cta_link", widget: "string"}
-
   - name: "projekte"
     label: "Projekte"
     folder: "content/projekte"
@@ -47,6 +38,15 @@ collections:
   - name: "pages"
     label: "Seiten"
     files:
+      - label: "Header"
+        name: "header"
+        file: "src/content/header.md"
+        fields:
+          - {label: "Logo", name: "logo", widget: "image"}
+          - {label: "Firmenname", name: "company_name", widget: "string"}
+          - {label: "CTA Text", name: "cta_text", widget: "string"}
+          - {label: "CTA Link", name: "cta_link", widget: "string"}
+
       - label: "Homepage"
         name: "homepage"
         file: "src/content/homepage/homepage.md"
@@ -56,7 +56,7 @@ collections:
             widget: "object"
             fields:
               - {label: "Überschrift", name: "headline", widget: "string", default: "Lichtlösungen, die Sie sonst nirgendwo kaufen können"}
-              - {label: "Untertitel", name: "subline", widget: "text", default: "Weil sie nur für Sie entwickelt und produziert werden – maßgeschneidert nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen"}
+              - {label: "Untertitel", name: "subline", widget: "text", default: "Weil sie nur für Sie entwickelt und produziert werden — maßgeschneidert nach Ihren Anforderungen von Österreichs Experten für Lichtoberflächen"}
               - {label: "Primärer Button Text", name: "primary_button_text", widget: "string", default: "Kostenlose Lichtberatung vereinbaren"}
               - {label: "Primärer Button Link", name: "primary_button_link", widget: "string", default: "#kontakt"}
               - {label: "Sekundärer Button Text", name: "secondary_button_text", widget: "string", default: "Projektbeispiele ansehen"}
